@@ -9,7 +9,7 @@ if (resolve('/admin/pages')) {
 } elseif (resolve('/admin/pages/create')) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $pages_create();
-        header('location: /admin/pages');
+        return header('location: /admin/pages');
     }
     render('admin/pages/create', 'admin');
 
@@ -18,18 +18,15 @@ if (resolve('/admin/pages')) {
     render('admin/pages/view', 'admin',  ['page' => $page]);
     
 } elseif ($params = resolve('/admin/pages/(\d+)/edit')) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pages_edit($params[1]);
-        header('location: /admin/pages');
+        return header('location: /admin/pages/' . $params[1]);
     }
-    render('admin/pages/edit', 'admin');
+    $page = $pages_one($params[1]);
+    render('admin/pages/edit', 'admin', ['page' => $page]);
 
 } elseif ($params = resolve('/admin/pages/(\d+)/delete')) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pages_delete($params[1]);
-        header('location: /admin/pages');
-    }
-    header('location: /admin/pages');
-
+        return header('location: /admin/pages');
 }
     

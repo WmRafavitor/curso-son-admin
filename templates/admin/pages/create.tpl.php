@@ -3,7 +3,7 @@
 <form action="" method="POST">
     <div class="form-group">
       <label for="pagesTitle">Título</label> 
-      <input name="title" id="pagesTitle" type="text" class="form-control" placeholder="Aqui vai o título da página..."> 
+      <input name="title" id="pagesTitle" type="text" class="form-control" placeholder="Aqui vai o título da página..." required> 
     </div>
     <div class="form-group">
         <label for="pagesUrl">URL</label>
